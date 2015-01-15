@@ -10,19 +10,20 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JTextField;
 
-public class Test extends JFrame {
+public class StartClassWithGUI extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
 
 	/**
 	 * Launch the application.
+	 * Detta nedan betyder bara att det är lite mer komplext med en applikation som har ett GUI så 
+	 * Det behöver vara lite mer i Main-metoden.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Test frame = new Test();
+					StartClassWithGUI frame = new StartClassWithGUI(); //Här startas vårt fönster se nedan!
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,34 +35,13 @@ public class Test extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Test() {
+	public StartClassWithGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 282, 233);
+		setBounds(100, 100, 282, 400);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.BLUE);
+		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(84, 81, 89, 23);
-		contentPane.add(btnNewButton);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(28, 11, 126, 63);
-		contentPane.add(panel);
-		
-		textField = new JTextField();
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		int i = 1;
-		String[] s = new String[3];
-		for (int j = 0; j < 5; j++) {
-			s[j] = "Hej";
-		}
-		
-		
-		
-		
+		contentPane.setLayout(new BorderLayout(0, 0));
 	}
 }
