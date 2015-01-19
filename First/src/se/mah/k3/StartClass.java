@@ -1,4 +1,8 @@
 package se.mah.k3;	//Package är hela adressen till klassen så man inte bara säger "Kungsgatan 37" utan även anger i vilken stad 
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class StartClass {
 	/*Detta är den enklaste möjliga körbara klass, datorn letar efter en metod som heter main som den nedan 
 	 * för att veta var den skall starta programmet
@@ -12,7 +16,7 @@ public class StartClass {
 		for (int i = 0; i < 8; i = i+1){
 			sA[i] = "Tom";
 		}
-		//Controll
+		//Kolla om det blev rätt
 		for (int i = 0; i < 8; i = i+1){
 			System.out.println(sA[i]);
 		}
@@ -24,6 +28,23 @@ public class StartClass {
 		//Eller så här vad är detta ?????
 		for (String string : sA) {
 			System.out.println(string);
+		}
+		
+		
+		ArrayList<User> aL = new ArrayList<User>();
+		aL.add(new User("Tommy1"));
+		aL.add(new User("Tommy2"));
+		aL.add(new User("Tommy3"));
+		aL.add(new User("Tommy4"));
+		aL.add(new User("Tommy5"));
+		for (User user : aL) {
+			System.out.println(user.getName());
+		}
+		for (User u : aL) {
+			u.setName("treo");
+		}
+		for (User user : aL) {
+			System.out.println(user.getName());
 		}
 		
 		//Uppgift 4:
