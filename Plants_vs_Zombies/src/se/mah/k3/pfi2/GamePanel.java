@@ -6,23 +6,48 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollBar;
+import javax.swing.JTextArea;
+import java.awt.FlowLayout;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.border.TitledBorder;
+import java.awt.Color;
 
 public class GamePanel extends JFrame {
 
 	private JPanel contentPane;
-
-	
-
 	/**
 	 * Create the frame.
 	 */
 	public GamePanel() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 567, 623);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "GameInfo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 380, 528, 193);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 21, 508, 161);
+		panel.add(scrollPane);
+		
+		JTextArea gameInfotextArea = new JTextArea();
+		scrollPane.setViewportView(gameInfotextArea);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(102, 204, 51));
+		panel_1.setBorder(new TitledBorder(null, "GamePanel", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBounds(10, 11, 528, 358);
+		contentPane.add(panel_1);
+		for (int i = 0; i < 100; i++) {
+			gameInfotextArea.append("Lorem ipsum\n");
+		}
 	}
-
 }
