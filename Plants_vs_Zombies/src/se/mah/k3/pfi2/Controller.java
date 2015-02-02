@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 public class Controller {
 	ArrayList<Zombie> zombies;
+	ArrayList<Plant> plants;
+	ArrayList<Sun> suns;
 	
-	//ToDo: skapa Arrayer för Plants och Sun!!
+	//ToDo: skapa Arrayer fï¿½r Plants och Sun!!
 	
 	public Controller() {
 		GamePanel gamePanel = new GamePanel ();
@@ -15,12 +17,12 @@ public class Controller {
 		zombies.add(new Zombie("Zombie4", 70, 155, "SjukZombie"));
 		zombies.add(new Zombie("Zombie5", 87, 62, "MrZombie"));
 		zombies.add(new Zombie("Zombie6", 12, 13, "MrZombie"));
-		//ToDo Loopa ut detta i GameInfo rutan i GamePanel i stället
+		//ToDo Loopa ut detta i GameInfo rutan i GamePanel i stï¿½llet
 		for (Zombie zombie : zombies) {
 			System.out.println("Namn: "+zombie.getName());
 		}
 		//ToDo fyll SunArray och PLantArray med instanser av Sun och Plant
-		//ToDo Loopa ut Solar och Plantor i GameInfo rutan i GamePanel i stället
+		//ToDo Loopa ut Solar och Plantor i GameInfo rutan i GamePanel i stï¿½llet
 		
 	}
 
