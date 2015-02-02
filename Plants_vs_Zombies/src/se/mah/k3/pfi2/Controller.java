@@ -1,6 +1,7 @@
 package se.mah.k3.pfi2;
 
 import java.util.ArrayList;
+import javax.swing.JTextArea;
 
 public class Controller {
 	ArrayList<Zombie> zombies;
@@ -9,6 +10,11 @@ public class Controller {
 	
 	public Controller() {
 		GamePanel gamePanel = new GamePanel ();
+		
+		JTextArea txtrTest = new JTextArea();
+		txtrTest.setText("test");
+		txtrTest.setBounds(107, 74, 348, 239);
+		gamePanel.getContentPane().add(txtrTest);
 		gamePanel.setVisible(true);
 		ArrayList<Zombie> zombies = new ArrayList<Zombie>();
 		zombies.add(new Zombie("Zombie3", 50, 99, "NormalZombie"));
@@ -23,5 +29,4 @@ public class Controller {
 		//ToDo Loopa ut Solar och Plantor i GameInfo rutan i GamePanel i stället
 		
 	}
-
 }
