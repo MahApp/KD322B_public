@@ -56,7 +56,18 @@ public class GamePanel extends JFrame {
 	
 	public void printZombies(ArrayList<Zombie> myZombies){
 		for (Zombie z : myZombies) {
-			gameInfotextArea.append(z.getName());
+			gameInfotextArea.append(z.getName()+"\n");
+		}
+	}
+	
+	public void printSuns(ArrayList<Sun> mySuns){
+		for (Sun s : mySuns) {
+			gameInfotextArea.append(s.getName()+"\n");
+		}
+	}
+	public void printPlants(ArrayList<Plant> myPlants){
+		for (Plant p : myPlants) {
+			gameInfotextArea.append(p.getName()+"\n");
 		}
 	}
 }
