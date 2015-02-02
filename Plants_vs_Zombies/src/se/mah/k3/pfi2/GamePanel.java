@@ -8,15 +8,20 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
+
 import java.awt.FlowLayout;
+
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
+
 import java.awt.Color;
+import java.util.ArrayList;
 
 public class GamePanel extends JFrame {
 
 	private JPanel contentPane;
+	private JTextArea gameInfotextArea;
 	/**
 	 * Create the frame.
 	 */
@@ -38,7 +43,7 @@ public class GamePanel extends JFrame {
 		scrollPane.setBounds(10, 21, 508, 161);
 		panel.add(scrollPane);
 		
-		JTextArea gameInfotextArea = new JTextArea();
+		gameInfotextArea = new JTextArea();
 		scrollPane.setViewportView(gameInfotextArea);
 		
 		JPanel panel_1 = new JPanel();
@@ -46,8 +51,12 @@ public class GamePanel extends JFrame {
 		panel_1.setBorder(new TitledBorder(null, "GamePanel", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBounds(10, 11, 528, 358);
 		contentPane.add(panel_1);
-		for (int i = 0; i < 100; i++) {
-			gameInfotextArea.append("Lorem ipsum\n");
+		
+	}
+	
+	public void printZombies(ArrayList<Zombie> myZombies){
+		for (Zombie z : myZombies) {
+			gameInfotextArea.append(z.getName());
 		}
 	}
 }
