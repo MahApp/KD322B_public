@@ -15,10 +15,10 @@ public class Zombie {
 	}
 	
 	public String getName(){
-		
 		return name;
 	}
 	
+	/**This makes the zoombie walk forward*/
 	public void walk(){
 		// Här skall Zombien gå
 		
