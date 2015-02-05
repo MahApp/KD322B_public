@@ -18,7 +18,7 @@ public class Controller {
 		// We will need another thread were all the work is done 
 		Thread t = new UpdateThread(this); //This creates a thread
 		t.start(); //this starts a thread when ok with preparations etc
-					//the method run() in the thread is called.
+					//the method run() in the thread is called when the thred starts.
 	}
 	
 	public ArrayList<Zombie> getZombies() {
