@@ -3,45 +3,84 @@ package se.mah.k3.pfi2;
 import java.util.ArrayList;
 
 public class Controller {
-	ArrayList<Zombie> zombies;
-	ArrayList<Plant> plants;
-	ArrayList<Sun> suns;
+	private ArrayList<Zombie> zombies;
+	private ArrayList<Plant> plants;
+	private ArrayList<Sun> suns;
 	
-	GamePanel gamePanel;
-	
-	//ToDo: skapa Arrayer f�r Plants och Sun!!
+	GameFrame gameFrame;
 	
 	public Controller() {
-		gamePanel = new GamePanel ();
-		gamePanel.setVisible(true);
-		//Skapa lite Zombies
+		gameFrame = new GameFrame (this);
+		gameFrame.setVisible(true);
 		zombies = new ArrayList<Zombie>();
-		zombies.add(new Zombie("Zombie3", 50, 99, "NormalZombie"));
-		zombies.add(new Zombie("Zombie4", 70, 155, "SjukZombie"));
-		zombies.add(new Zombie("Zombie5", 87, 62, "MrZombie"));
-		zombies.add(new Zombie("Zombie6", 12, 13, "MrZombie"));
-		
-		//ToDo Loopa ut detta i GameInfo rutan i GamePanel i st�llet
 		plants = new ArrayList<Plant>();
-		plants.add(new Plant("Plant1", 3, 2, "PeaShooter"));
-		plants.add(new Plant("Plant2", 6, 9, "Sunflower"));
-		plants.add(new Plant("Plant3", 11, 1, "Wallnut"));
-		plants.add(new Plant("Plant4", 8, 7, "Cherry"));
-		//ToDo fyll SunArray och PLantArray med instanser av Sun och Plant
-		//ToDo Loopa ut Solar och Plantor i GameInfo rutan i GamePanel i st�llet
-
-		suns = new ArrayList<Sun>();
-		suns.add(new Sun("sun1", 200, 221, "Drop"));
-		suns.add(new Sun("sun2", 676, 923, "Falling"));
-		
-		repaint();
-		
+		suns = new ArrayList<Sun>();	
+		// We will need another thread were all the work is done 
+		Thread t = new UpdateThread(this); //This creates a thread
+		t.start(); //this starts a thread when ok with preparations etc
+					//the method run() in the thread is called.
 	}
 	
-	public void repaint(){
-		gamePanel.printZombies(zombies);
-		gamePanel.printPlants(plants);
-		gamePanel.printSuns(suns);
+	public ArrayList<Zombie> getZombies() {
+		return zombies;
+	}
+
+	public ArrayList<Plant> getPlants() {
+		return plants;
+	}
+
+	public ArrayList<Sun> getSuns() {
+		return suns;
+	}
+
+	public void update(){
+		updateZombies();
+		updateSuns();
+		updatePlants();
+		gameFrame.clearGameInfoPanel();
+		gameFrame.appendToGameInfoPanel("Number of Suns: "+suns.size()+"\n");
+		gameFrame.appendToGameInfoPanel("Number of Zombies: "+zombies.size()+"\n");
+		gameFrame.appendToGameInfoPanel("Number of Plants: "+plants.size()+"\n");
+	}
+
+	public void rePaint() {
+		gameFrame.repaint();
+	}
+
+	private void updatePlants() {
+		for (Plant plant : plants) {
+			plant.setPositionX(plant.getPositionX()+1);
+			plant.setPositionY(plant.getPositionY()+1);
+		}
+		
+	}
+
+	private void updateSuns() {
+		for (Sun s : suns) {
+			s.fall();
+		}
+	}
+
+	private void updateZombies() {
+		for (Zombie z : zombies) {
+			z.walk();
+		}
+	}
+	
+	public void addZombie() {
+		zombies.add(new Zombie("zzombie",20,20,"NightZombie"));
+		
+	}
+
+	public void addSun() {
+		suns.add(new Sun("sun1", 20, 20, "Drop"));
+		
+	}
+
+
+	public void addPlant() {
+		plants.add(new Plant("Plant2", 20, 30, "Sunflower"));
+		
 	}
 }
 

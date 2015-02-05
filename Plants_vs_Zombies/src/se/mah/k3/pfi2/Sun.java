@@ -6,7 +6,6 @@ public class Sun {
 	private int positionX;
 	private int positionY;
 	private String type;
-
 	
 	public Sun(String nameIn, int positionXIn, int positionYIn, String typeIn) {
 		
@@ -16,12 +15,18 @@ public class Sun {
 		this.type = typeIn;
 	}
 
+	public int getPositionX() {
+		return positionX;
+	}
+
+	public int getPositionY() {
+		return positionY;
+	}
+
 	public String getName(){
 		return name;
-
-	
-	
 	}
-	
-	
+	public void fall(){
+		this.positionY = this.positionY + 2;
+	}
 }

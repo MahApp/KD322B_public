@@ -7,19 +7,32 @@ public class Plant {
 	private int positionY;
 	private String type;
 
+	public Plant(String nameIn, int positionXIn, int positionYIn, String typeIn) {
+		this.name = nameIn;
+		this.positionX = positionXIn;
+		this.positionY = positionYIn;
+		this.type = typeIn;
+	}
 
+	public int getPositionX() {
+		return positionX;
+	}
 
-public Plant(String nameIn, int positionXIn, int positionYIn, String typeIn) {
+	public int getPositionY() {
+		return positionY;
+	}
 	
-	this.name = nameIn;
-	this.positionX = positionXIn;
-	this.positionY = positionYIn;
-	this.type = typeIn;
-}
+	
+	public void setPositionX(int positionX) {
+		this.positionX = positionX;
+	}
 
-public String getName(){
-	return name;
-}
+	public void setPositionY(int positionY) {
+		this.positionY = positionY;
+	}
 
+	public String getName(){
+		return name;
+	}
 
 }
