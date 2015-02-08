@@ -114,6 +114,7 @@ public class GameFrame extends JFrame {
 			JButton btnCherry = new JButton("Cherry");
 			btnCherry.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					controller.addCherry();
 				}
 			});
 			panel_2.add(btnCherry);

@@ -21,6 +21,7 @@ public class Controller {
 		lawnMovers = new ArrayList<LawnMover>();
 		// We will need another thread were all the updating and repaintingwork is done 
 		Thread t = new UpdateThread(this); //This creates a thread
+		t.setName("UpdateThread");
 		t.start(); //this starts a thread when ok with preparations etc
 					//the method run() in the thread is called when the thred starts.
 	}
@@ -102,7 +103,7 @@ public class Controller {
 	}
 
 	public void addWalnut() {
-		plants.add(new PotatoMine(40, 30));
+		plants.add(new Walnut(40, 30));
 		
 	}
 
@@ -113,6 +114,11 @@ public class Controller {
 
 	public void addSunFlower() {
 		plants.add(new SunFlower(40, 100));
+		
+	}
+
+	public void addCherry() {
+		plants.add(new Cherry(100, 100));
 		
 	}
 	
