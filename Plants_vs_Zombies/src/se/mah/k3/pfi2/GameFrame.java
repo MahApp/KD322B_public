@@ -36,7 +36,7 @@ public class GameFrame extends JFrame {
 	public GameFrame(Controller c) {
 		this.controller = c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 632, 700);
+		setBounds(100, 100, 632, 780);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -64,31 +64,78 @@ public class GameFrame extends JFrame {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Controlls", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 594, 518, 56);
+		panel_1.setBounds(10, 594, 518, 136);
+		//Alla knappar som skickar tillbaka ett anrop till Controllern för att skapa de olika objekten.
 		contentPane.add(panel_1);
-			JButton btnAddZombie = new JButton("Add Zombie");
-			panel_1.add(btnAddZombie);
-			
-			JButton btnAddSun = new JButton("Add Sun");
-			panel_1.add(btnAddSun);
-			
-			JButton btnAddPlant = new JButton("Add Plant");
-			panel_1.add(btnAddPlant);
-			btnAddPlant.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					controller.addPlant();
-				}
-			});
-			btnAddSun.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					controller.addSun();
-				}
-			});
-			btnAddZombie.addActionListener(new ActionListener() {
+			JButton btnZombie = new JButton("Zombie");
+			btnZombie.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					controller.addZombie();
 				}
 			});
+			panel_1.add(btnZombie);
+			
+			JButton btnSun = new JButton("Sun");
+			btnSun.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					controller.addSun();
+				}
+			});
+			panel_1.add(btnSun);
+			
+			JButton btnMover = new JButton("Mover");
+			btnMover.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					controller.addLawnMover();
+				}
+			});
+			panel_1.add(btnMover);
+			
+			JPanel panel_2 = new JPanel();
+			panel_2.setBorder(new TitledBorder(null, "Plants", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel_1.add(panel_2);
+			
+			JButton btnPeaShooter = new JButton("PeaShooter");
+			btnPeaShooter.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					controller.addPeaShooter();
+				}
+			});
+			panel_2.add(btnPeaShooter);
+			
+			JButton btnSunflower = new JButton("SunFlower");
+			btnSunflower.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					controller.addSunFlower();
+				}
+			});
+			panel_2.add(btnSunflower);
+			
+			JButton btnCherry = new JButton("Cherry");
+			btnCherry.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			panel_2.add(btnCherry);
+			
+			JButton btnWalnut = new JButton("Walnut");
+			btnWalnut.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					controller.addWalnut();
+				}
+			});
+			panel_2.add(btnWalnut);
+			
+			JButton btnNewButton_1 = new JButton("PotatoMine");
+			btnNewButton_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					controller.addPotatoMine();
+				}
+			});
+			panel_2.add(btnNewButton_1);
+			
+			
+			
 	}
 	
 	public void appendToGameInfoPanel(String s){

@@ -19,9 +19,10 @@ public class GamePanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		 g.setColor(getBackground());
          g.fillRect(0, 0, getWidth(), getHeight());
-		g.setColor(Color.RED);
+		
 		//This try catch is to prevent windowbuilder from crashing 
 	    try { 
+	    	g.setColor(Color.RED);
 			for (Plant p : controller.getPlants()) {
 				g.fillOval(p.getPositionX(), p.getPositionY(), 10, 10);
 			}
@@ -32,6 +33,10 @@ public class GamePanel extends JPanel {
 			g.setColor(Color.YELLOW);
 			for (Sun s : controller.getSuns()) {
 				g.fillOval(s.getPositionX(), s.getPositionY(), 10, 10);
+			}
+			g.setColor(Color.BLUE);
+			for (LawnMover lm : controller.getMovers()) {
+				g.fillOval(lm.getPositionX(), lm.getPositionY(), 10, 10);
 			}
 		} catch (Exception e) {
 			//Ok so what

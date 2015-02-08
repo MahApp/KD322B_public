@@ -3,23 +3,17 @@ package se.mah.k3.pfi2;
 import java.util.Random;
 
 public class Zombie {
-	private String name;
 	private int positionX;
-	
-
 	private int positionY;
-	private String type;
-	
-	public Zombie(String nameIn, int positionXIn, int positionYIn, String typeIn) {		
-		this.name = nameIn;
+	public enum ZombieType {NORMAL,FLAG,CONEHEAD}; 
+	private ZombieType type;
+
+	public Zombie(int positionXIn, int positionYIn, ZombieType typeIn) {		
 		this.positionX = positionXIn;
 		this.positionY = positionYIn;
 		this.type = typeIn;
 	}
-	
-	public String getName(){
-		return name;
-	}
+
 	public int getPositionX() {
 		return positionX;
 	}
@@ -30,7 +24,21 @@ public class Zombie {
 	
 	/**This makes the zoombie walk forward*/
 	public void walk(){
-		// Här skall Zombien gå
+		//HÄr kommer en switch på de olika ZombieTyperna
+		switch (type) {
+		case NORMAL:
+			
+			break;
+		case FLAG:
+			
+			break;
+		case CONEHEAD:
+			
+			break;
+		default:
+			break;
+		}
+
 		this.positionX = this.positionX +1;
 	}
 
