@@ -6,7 +6,7 @@ public class LawnMover {
 	private int positionX;
 	private int positionY;
 	private String name ="Ures";
-	private String fudge;
+	private String action;
 	
 
 	public LawnMover(int positionX, int positionY) {
