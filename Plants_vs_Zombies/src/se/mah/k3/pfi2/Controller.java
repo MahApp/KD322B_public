@@ -1,6 +1,7 @@
 package se.mah.k3.pfi2;
 
 import java.util.ArrayList;
+import javax.swing.JTextArea;
 
 import se.mah.k3.pfi2.Zombie.ZombieType;
 /** ALl info from http://plantsvszombies.wikia.com/wiki/Main_Page*/
@@ -121,6 +122,5 @@ public class Controller {
 		plants.add(new Cherry(100, 100));
 		
 	}
-	
 }
 
