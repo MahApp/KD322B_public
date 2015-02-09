@@ -1,9 +1,11 @@
 package se.mah.k3.pfi2;
 
+/**This is the lawnmover. It is the last defense against the hungry Zombies*/
 public class LawnMover {
 
 	private int positionX;
 	private int positionY;
+	private String name ="Urestanke";
 	
 
 	public LawnMover(int positionX, int positionY) {
