@@ -8,8 +8,10 @@ public class SunFlower extends Plant {
 
 	@Override
 	public void act() {
-		setPositionX(getPositionX()+1);
-		setPositionY(getPositionY()+1);
+	setPositionX(5);
+	setPositionY(5);
+	//sunflower doesn't move from original place
+	//add new sun after specified time
 	}
 
 }
