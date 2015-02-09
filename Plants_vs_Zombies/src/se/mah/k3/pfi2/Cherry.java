@@ -4,7 +4,7 @@ public class Cherry extends Plant {
 
 	public Cherry(int positionXIn, int positionYIn) {
 		super(positionXIn, positionYIn);
-
+///Test
 	}
 	
 	@Override
