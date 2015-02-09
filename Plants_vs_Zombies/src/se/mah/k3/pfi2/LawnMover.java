@@ -32,7 +32,7 @@ public class LawnMover {
 
 	public void isItTimeToAct() {
 		positionX = positionX+1;
-		positionY = positionY+2;
+		positionY = positionY+0;
 		
 	}
 
