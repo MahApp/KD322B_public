@@ -84,7 +84,7 @@ public class Controller {
 	}
 	
 	public void addZombie() {
-		zombies.add(new Zombie(20,20,ZombieType.NORMAL));
+		zombies.add(new Zombie(20,20,ZombieType.CONEHEAD));
 	}
 
 	public void addSun() {
