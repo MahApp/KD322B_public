@@ -17,10 +17,6 @@ import se.mah.k3.pfi2.model.Zombie.ZombieType;
 import se.mah.k3.pfi2.view.GameFrame;
 /** ALl info from http://plantsvszombies.wikia.com/wiki/Main_Page*/
 public class Controller {
-/*	private ArrayList<Zombie> zombies;
-	private ArrayList<Plant> plants;
-	private ArrayList<Sun> suns;
-	private ArrayList<LawnMover> lawnMovers;*/
 	private ArrayList<GameItem> gameItems;
 	
 	GameFrame gameFrame;
@@ -28,43 +24,20 @@ public class Controller {
 	public Controller() {
 		gameFrame = new GameFrame (this);
 		gameFrame.setVisible(true);
-//		zombies = new ArrayList<Zombie>();
-//		plants = new ArrayList<Plant>();
-//		suns = new ArrayList<Sun>();	
-//		lawnMovers = new ArrayList<LawnMover>();
 		gameItems = new ArrayList<GameItem>();
-		// We will need another thread were all the updating and repaintingwork is done 
+		
+		// We will need another thread were all the updating and repainting and updating is done 
 		Thread t = new UpdateThread(this); //This creates a thread
 		t.setName("UpdateThread");
 		t.start(); //this starts a thread when ok with preparations etc
 					//the method run() in the thread is called when the thred starts.
 	}
-	
-//	public ArrayList<Zombie> getZombies() {
-//		return zombies;
-//	}
-//
-//	public ArrayList<Plant> getPlants() {
-//		return plants;
-//	}
-//
-//	public ArrayList<Sun> getSuns() {
-//		return suns;
-//	}
-//	
-//	public  ArrayList<LawnMover> getMovers() {
-//		return lawnMovers;
-//	}
 
 	public ArrayList<GameItem> getGameItems (){
 		return gameItems;
 	}
 	
 	public void update(){
-//		updateZombies();
-//		updateSuns();
-//		updatePlants();
-//		updateMovers();
 		updateGameItems();
 		gameFrame.clearGameInfoPanel();
 		gameFrame.appendToGameInfoPanel("Number of Game Items: "+gameItems.size()+"\n");
@@ -80,31 +53,7 @@ public class Controller {
 		gameFrame.repaint();
 	}
 
-//	private void updatePlants() {
-//		for (Plant plant : plants) {
-//			plant.act();
-//		}
-//		
-//	}
-//	
-//	private void updateMovers() {
-//		for (LawnMover mover : lawnMovers) {
-//			mover.isItTimeToAct();
-//		}
-//	}
-//
-//	private void updateSuns() {
-//		for (Sun s : suns) {
-//			s.fall();
-//		}
-//	}
-//
-//	private void updateZombies() {
-//		for (Zombie z : zombies) {
-//			z.walk();
-//		}
-//	}
-	
+	//Since we want to add all instances as their runtime classes this still has to be individual methods.
 	public void addZombie() {
 		gameItems.add(new Zombie(20,20,ZombieType.CONEHEAD));
 	}

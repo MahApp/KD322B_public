@@ -12,19 +12,22 @@ public abstract class Plant implements GameItem {
 		this.positionY = positionYIn;
 	}
 
+	@Override	
 	public int getPositionX() {
 		return positionX;
 	}
 
+	@Override
 	public int getPositionY() {
 		return positionY;
 	}
 	
-	
+	@Override
 	public void setPositionX(int positionX) {
 		this.positionX = positionX;
 	}
 
+	@Override
 	public void setPositionY(int positionY) {
 		this.positionY = positionY;
 	}

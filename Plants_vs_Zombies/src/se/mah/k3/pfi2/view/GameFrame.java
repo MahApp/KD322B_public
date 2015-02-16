@@ -39,38 +39,26 @@ public class GameFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public GameFrame(Controller c) {
+		setTitle("Plants vs Zombies");
 		this.controller = c;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 632, 780);
+		setBounds(100, 100, 1420, 931);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "GameInfo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 402, 600, 193);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 21, 580, 161);
-		panel.add(scrollPane);
-		
-		textArea = new JTextArea();
-		scrollPane.setViewportView(textArea);
-		
 		gamepanel = new GamePanel(controller);
-		gamepanel.setLocation(10, 11);
-		gamepanel.setSize(600, 391);
+		gamepanel.setLocation(0, 0);
+		gamepanel.setSize(1384, 628);
 		gamepanel.setBackground(new Color(102, 204, 51));
 		gamepanel.setBorder(null);
 		contentPane.add(gamepanel);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Controlls", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 594, 518, 136);
+		panel_1.setBounds(20, 650, 518, 136);
 		//Alla knappar som skickar tillbaka ett anrop till Controllern för att skapa de olika objekten.
 		contentPane.add(panel_1);
 			JButton btnZombie = new JButton("Zombie");
@@ -96,9 +84,6 @@ public class GameFrame extends JFrame {
 				}
 			});
 			panel_1.add(btnMover);
-			
-			JLabel label = new JLabel("New label");
-			panel_1.add(label);
 			
 			JPanel panel_2 = new JPanel();
 			panel_2.setBorder(new TitledBorder(null, "Plants", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -144,13 +129,18 @@ public class GameFrame extends JFrame {
 			});
 			panel_2.add(btnNewButton_1);
 			
-			JLabel lblNewLabel = new JLabel("New label");
-			lblNewLabel.setIcon());
-			lblNewLabel.setBounds(10, 741, 46, 14);
-			contentPane.add(lblNewLabel);
+			JPanel panel = new JPanel();
+			panel.setBounds(548, 650, 600, 193);
+			contentPane.add(panel);
+			panel.setBorder(new TitledBorder(null, "GameInfo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel.setLayout(null);
 			
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(10, 21, 580, 161);
+			panel.add(scrollPane);
 			
-			
+			textArea = new JTextArea();
+			scrollPane.setViewportView(textArea);
 	}
 	
 	public void appendToGameInfoPanel(String s){
