@@ -4,6 +4,11 @@ import java.awt.Image;
 
 public class PotatoMine extends Plant {
 
+	private int move = 0;
+	private boolean moving = false;
+
+
+		
 	public PotatoMine(int positionXIn, int positionYIn) {
 		super(positionXIn, positionYIn);
 
@@ -12,8 +17,19 @@ public class PotatoMine extends Plant {
 
 	@Override
 	public void act() {
-		super.setPositionX(getPositionX()+1);
-		setPositionY(getPositionY()+1);
+		setPositionX(getPositionX() + move);
+		setPositionY(getPositionY());
+		if(moving == true){
+			move = 1;
+		} else if(moving == false){
+			move = -1;
+		}
+		
+		if(super.getPositionX() >= 20){
+			moving = false;
+		} else if(super.getPositionX() <= 0){
+			moving = true;
+		}
 	}
 
 	@Override
