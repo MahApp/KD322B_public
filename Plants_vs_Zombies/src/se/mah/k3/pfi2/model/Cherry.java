@@ -1,5 +1,6 @@
-package se.mah.k3.pfi2;
+package se.mah.k3.pfi2.model;
 
+import java.awt.Image;
 import java.util.Random; // Import the random library
 
 public class Cherry extends Plant {
@@ -27,5 +28,17 @@ public class Cherry extends Plant {
 		if (getPositionY() < randomPositionY) {
 			this.setPositionY(getPositionY() + 2);
 		}
+	}
+
+	@Override
+	public void doYourThing() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Image getImage() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

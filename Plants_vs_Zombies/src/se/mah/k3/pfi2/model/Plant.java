@@ -1,6 +1,8 @@
-package se.mah.k3.pfi2;
+package se.mah.k3.pfi2.model;
 
-public abstract class Plant {
+import se.mah.k3.pfi2.control.GameItem;
+
+public abstract class Plant implements GameItem {
 
 	private int positionX;
 	private int positionY;

@@ -1,4 +1,4 @@
-package se.mah.k3.pfi2;
+package se.mah.k3.pfi2.view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -21,8 +21,13 @@ import java.util.ArrayList;
 
 import javax.swing.JTextPane;
 import javax.swing.JButton;
+
+import se.mah.k3.pfi2.control.Controller;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class GameFrame extends JFrame {
 
@@ -92,6 +97,9 @@ public class GameFrame extends JFrame {
 			});
 			panel_1.add(btnMover);
 			
+			JLabel label = new JLabel("New label");
+			panel_1.add(label);
+			
 			JPanel panel_2 = new JPanel();
 			panel_2.setBorder(new TitledBorder(null, "Plants", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			panel_1.add(panel_2);
@@ -135,6 +143,11 @@ public class GameFrame extends JFrame {
 				}
 			});
 			panel_2.add(btnNewButton_1);
+			
+			JLabel lblNewLabel = new JLabel("New label");
+			lblNewLabel.setIcon());
+			lblNewLabel.setBounds(10, 741, 46, 14);
+			contentPane.add(lblNewLabel);
 			
 			
 			

@@ -1,7 +1,11 @@
-package se.mah.k3.pfi2;
+package se.mah.k3.pfi2.model;
+
+import java.awt.Image;
+
+import se.mah.k3.pfi2.control.GameItem;
 
 /**This is the lawnmover. It is the last defense against the hungry Zombies*/
-public class LawnMover {
+public class LawnMover implements GameItem {
 
 	private int positionX;
 	private int positionY;
@@ -33,6 +37,30 @@ public class LawnMover {
 	public void isItTimeToAct() {
 		positionX = positionX+1;
 		positionY = positionY+0;
+		
+	}
+
+
+
+	@Override
+	public void doYourThing() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public Image getImage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public void setPositionX(int x) {
+		// TODO Auto-generated method stub
 		
 	}
 
