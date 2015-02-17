@@ -1,4 +1,5 @@
-package se.mah.k3.pfi2;
+package se.mah.k3.pfi2.control;
+
 
 public class SetUp {
 

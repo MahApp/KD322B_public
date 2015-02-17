@@ -1,4 +1,4 @@
-package se.mah.k3.pfi2;
+package se.mah.k3.pfi2.control;
 
 public class UpdateThread extends Thread {
    private boolean running = true;
@@ -12,11 +12,11 @@ public class UpdateThread extends Thread {
    public void run() {
 	   long timer = System.currentTimeMillis();
 	   while (running) {
-		   if (System.currentTimeMillis() - timer > timeBetweenRepaint) {
-			   controller.update(); //Call this method and update positions etc
+		   if (System.currentTimeMillis() - timer > timeBetweenRepaint) { 
 			   controller.rePaint(); //Call this method to repaint
+			   controller.update(); //Call this method and update positions etc
 			   timer = timer + timeBetweenRepaint;
 		   }
 	   }
-   }
+   }  
 }
