@@ -3,7 +3,6 @@ package se.mah.k3.pfi2.model;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-import javax.swing.ImageIcon;
 import se.mah.k3.pfi2.view.GameFrame;
 
 public class PeaShooter extends Plant {
