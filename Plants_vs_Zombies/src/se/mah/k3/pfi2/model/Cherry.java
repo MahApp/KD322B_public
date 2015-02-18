@@ -18,7 +18,7 @@ public class Cherry extends Plant {
 		super(positionXIn, positionYIn);
 		this.setPositionY(0); // set positionY to 0 for cheery to spawn at the
 								// top of the screen
-		image = Toolkit.getDefaultToolkit().getImage(Cherry.class.getResource("/se/mah/k3/pfi2/images/cherrybomb.png")); // add custom image.
+		image = Toolkit.getDefaultToolkit().getImage(Cherry.class.getResource("/se/mah/k3/pfi2/images/cherrybomb.png")); // add custom image for cherry bomb!
 
 	}
 
