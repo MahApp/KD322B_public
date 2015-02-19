@@ -21,6 +21,7 @@ public class Cherry extends Plant {
 		super(positionXIn, positionYIn);
 		this.setPositionY(0); // set positionY to 0 for cheery to spawn at the
 								// top of the screen
+
 		this.setPositionX(250);
 		image = Toolkit.getDefaultToolkit().getImage(
 				Cherry.class
@@ -35,16 +36,12 @@ public class Cherry extends Plant {
 
 	@Override
 	public Image getImage() {
-		// TODO Auto-generated method stub
+
 		return image;
 	}
 
 	@Override
 	public void act() {
-
-		// if positionY is less than the random number in randomPositionY, then
-		// add 2 to cherry's positionY until positionY is equal to the random
-		// generated number in randomPositionY
 
 	}
 
@@ -52,7 +49,7 @@ public class Cherry extends Plant {
 	public void doYourThing() {
 		if (this.getPositionY() < this.randomPositionY) {
 			this.setPositionY(getPositionY() + 2);
-			
-}
+
+		}
 	}
 }
