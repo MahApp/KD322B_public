@@ -29,8 +29,9 @@ public class SunFlower extends Plant {
 
 	@Override
 	public void doYourThing() {
-		
-		
+		Random random = new Random();
+		setPositionX(random.nextInt(100)+1);						//A Sunflower, from what I can understand, remains on its position. Anton
+		setPositionY(random.nextInt(100)+1);	
 	}
 
 	@Override
