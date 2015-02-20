@@ -48,7 +48,7 @@ public class Cherry extends Plant {
 		
 		this.explosion = Toolkit.getDefaultToolkit().getImage(
 
-		Cherry.class.getResource("/se/mah/k3/pfi2/images/explosion.gif"));
+		Cherry.class.getResource("/se/mah/k3/pfi2/images/explode.gif"));
 		
 		
 	}
@@ -84,7 +84,8 @@ public class Cherry extends Plant {
 		// When aliveTime has counted to 1000, change cherrybomb image to
 		// invisible (transparent) image.
 		if (aliveTime == 1000) {
-			this.image = (invisibility);
+			this.image = (explosion);
+			//this.image = (invisibility);
 
 		}
 
