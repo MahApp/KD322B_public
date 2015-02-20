@@ -48,7 +48,7 @@ public class Cherry extends Plant {
 		
 		this.explosion = Toolkit.getDefaultToolkit().getImage(
 
-		Cherry.class.getResource("/se/mah/k3/pfi2/images/exploded.png"));
+		Cherry.class.getResource("/se/mah/k3/pfi2/images/Explodez.png"));
 		
 		
 	}
@@ -86,7 +86,7 @@ public class Cherry extends Plant {
 		if (aliveTime == 1000) {
 			this.image = (explosion);
 		}
-		if (aliveTime == 1200) {
+		if (aliveTime == 120	0) {
 			this.image = (invisibility);
 			//this.image = (invisibility);
 
