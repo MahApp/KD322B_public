@@ -9,6 +9,7 @@ import java.util.Random; // Import the random library
 
 public class Cherry extends Plant {
 	private Image image;
+	private Image invisibility;
 	int aliveTime=0;
 	
 
@@ -25,7 +26,14 @@ public class Cherry extends Plant {
 								// top of the screen
 
 		this.setPositionX(250 + this.randomPositionX);
+		
+this.invisibility = Toolkit.getDefaultToolkit().getImage(
+				
+				Cherry.class
+						.getResource("/se/mah/k3/pfi2/images/invisibility.gif"));
+		
 		this.image = Toolkit.getDefaultToolkit().getImage(
+				
 				Cherry.class
 						.getResource("/se/mah/k3/pfi2/images/cherrybombz.png")); // add
 																					// custom
@@ -64,7 +72,8 @@ aliveTime = aliveTime + 1;
 		
 	}
 	if(aliveTime==1000){
-this.image=null;	
+this.image=(invisibility);
+
 }
 
 	}
