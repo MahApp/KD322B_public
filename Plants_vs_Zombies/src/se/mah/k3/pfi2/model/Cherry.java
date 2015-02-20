@@ -10,15 +10,18 @@ import java.util.Random; // Import the random library
 public class Cherry extends Plant {
 	private Image image;
 	private Image invisibility;
-	int aliveTime=0;
-	
+
+	// counter for cherrybomb's lifetime.
+	int aliveTime = 0;
 
 	Random rand = new Random();
 	Random rand2 = new Random();
-	int randomPositionY = rand.nextInt((390 - 0)); // Generate a random number
-	int randomPositionX = rand2.nextInt((500 - 0)); // between 0 & 391 and
-													// assign it to
-													// randomPositionY
+
+	// Random numbers for x & y positions.
+	int randomPositionY = rand.nextInt((390 - 0)); 
+	int randomPositionX = rand2.nextInt((700 - 0));
+													
+													
 
 	public Cherry(int positionXIn, int positionYIn) {
 		super(positionXIn, positionYIn);
@@ -26,23 +29,21 @@ public class Cherry extends Plant {
 								// top of the screen
 
 		this.setPositionX(250 + this.randomPositionX);
-		
-this.invisibility = Toolkit.getDefaultToolkit().getImage(
-				
-				Cherry.class
-						.getResource("/se/mah/k3/pfi2/images/invisibility.gif"));
-		
-		this.image = Toolkit.getDefaultToolkit().getImage(
-				
-				Cherry.class
-						.getResource("/se/mah/k3/pfi2/images/cherrybombz.png")); // add
-																					// custom
-																					// image
-																					// for
-																					// cherry
-																					// bomb!
 
-System.out.println(randomPositionX);
+		this.invisibility = Toolkit
+				.getDefaultToolkit()
+				.getImage(
+
+				// Load invisibility image.
+						Cherry.class
+								.getResource("/se/mah/k3/pfi2/images/invisibility.gif"));
+
+		// Load cherry bomb image
+		this.image = Toolkit.getDefaultToolkit().getImage(
+
+		Cherry.class.getResource("/se/mah/k3/pfi2/images/cherrybombz.png"));
+
+		System.out.println(randomPositionX);
 	}
 
 	@Override
@@ -58,25 +59,28 @@ System.out.println(randomPositionX);
 
 	@Override
 	public void doYourThing() {
-		
 
+		// Set position Y to it's current position +1 until it's equal to
+		// randomPositionY.
 		if (this.getPositionY() < this.randomPositionY) {
 			this.setPositionY(getPositionY() + 1);
 
 		}
 
-if (this.getPositionY()==randomPositionY){
-aliveTime = aliveTime + 1;
+		// When cherrybomb position is equal to randomposition Y it has landed.
+		// Start counter "aliveTime" in order to remove it after x seconds.
+		if (this.getPositionY() == randomPositionY) {
+			aliveTime = aliveTime + 1;
 
-	System.out.println(aliveTime);
-		
+		}
+
+		// When aliveTime has counted to 1000, change cherrybomb image to
+		// invisible (transparent) image.
+		if (aliveTime == 1000) {
+			this.image = (invisibility);
+
+		}
+
 	}
-	if(aliveTime==1000){
-this.image=(invisibility);
 
 }
-
-	}
-
-	}
-
