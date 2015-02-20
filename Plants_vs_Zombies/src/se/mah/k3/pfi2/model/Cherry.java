@@ -10,6 +10,8 @@ import java.util.Random; // Import the random library
 public class Cherry extends Plant {
 	private Image image;
 	private Image invisibility;
+	private Image explosion;
+	
 
 	// counter for cherrybomb's lifetime.
 	int aliveTime = 0;
@@ -43,7 +45,12 @@ public class Cherry extends Plant {
 
 		Cherry.class.getResource("/se/mah/k3/pfi2/images/cherrybombz.png"));
 
-		System.out.println(randomPositionX);
+		
+		this.explosion = Toolkit.getDefaultToolkit().getImage(
+
+		Cherry.class.getResource("/se/mah/k3/pfi2/images/explosion.gif"));
+		
+		
 	}
 
 	@Override
