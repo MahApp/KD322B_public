@@ -17,16 +17,19 @@ public class Zombie implements GameItem {
 	public enum ZombieType {NORMAL,FLAG,CONEHEAD}; 
 	private ZombieType type;
 	private ZombieType transform=null; 
-	
+	private boolean dead;
+	private float wobble = (float) Math.random();
+	private int row;
 	public static int killed=0; 
 	public static int spawned=0; 
+	public static boolean gameoverFlag=false;
 	
-	public Zombie(int positionXIn, int positionYIn, ZombieType typeIn) {		
-		this.positionX = positionXIn; // start posX
-		this.positionY = positionYIn; // strat PosY
-		this.type = typeIn;
+	public Zombie(int _positionX, int _positionY, ZombieType _type) {		
+		this.positionX = _positionX; // start posX
+		this.positionY = _positionY; // start PosY
+		this.type = _type;
 		spawned++;
-		switch (typeIn) {
+		switch (_type) {
 		case NORMAL:
 			image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/se/mah/k3/pfi2/images/zombie.png"));
 			this.health= (float) 9.25;
@@ -59,14 +62,33 @@ public class Zombie implements GameItem {
 		
 		
 	}
-	public void hit(float damage){
-		this.health-=damage;
+	public void hit(float _damage){
+		if(!this.dead){
+		this.health-=_damage;
+		blink();
+		checkDeath();
 		checkDegradation();
+		}
 	}
 	
 	
+	private void blink() {
+		// flashing graphics
+		
+	}
 	private void checkDegradation() {
 
+		
+	}
+	private void checkDeath() {
+		if(this.health<0){
+			this.dead=true;
+			try {
+				this.finalize();
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+		}	
 		
 	}
 	public int getPositionX() {
@@ -79,7 +101,10 @@ public class Zombie implements GameItem {
 	
 	/**This makes the zoombie walk forward*/
 	public void walk(){
-		this.positionX+=velocityX;
+		float w=(float)( 1*Math.sin(wobble)+1);
+		wobble+=0.03;
+		this.positionX+=w*velocityX;
+		
 		//HÄr kommer en switch på de olika ZombieTyperna
 //		switch (type) {
 //		case NORMAL:
@@ -99,29 +124,40 @@ public class Zombie implements GameItem {
 	@Override
 	public void doYourThing() {
 		this.walk();
-		
+		this.checkIfReachGoal();
 	}
 
+	private void checkIfReachGoal() {
+		if(this.positionX<0){
+			gameoverFlag=true;
+			System.out.println("Game over , the zombie has reached the house!!");
+		}
+	}
 	@Override
 	public Image getImage() {
-		// TODO Auto-generated method stub
-		
 		return this.image;
 	}
 
 	@Override
-	public void setPositionX(int x) {
-		// TODO Auto-generated method stub
-		this.positionX=x;
+	public void setPositionX(int _x) {
+
+		this.positionX=_x;
 	}
 
 	@Override
-	public void setPositionY(int y) {
-		// TODO Auto-generated method stub
-		this.positionY=y;
+	public void setPositionY(int _y) {
+
+		this.positionY=_y;
+	}
+	
+	public int getRow() {
+		return row;
+	}
+	public void setRow(int row) {
+		this.row = row;
 	}
 
-	/** dumping element when nt used*/
+	/** dumping element when not used*/
 	protected void finalize() throws Throwable{
 		killed++;
 	 System.out.println("zombie is removed from memory");
