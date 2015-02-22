@@ -55,10 +55,6 @@ public class Cherry extends Plant {
 		return image;
 	}
 
-	@Override
-	public void act() {
-
-	}
 
 	@Override
 	public void doYourThing() {

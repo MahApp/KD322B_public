@@ -15,6 +15,7 @@ import se.mah.k3.pfi2.model.Walnut;
 import se.mah.k3.pfi2.model.Zombie;
 import se.mah.k3.pfi2.model.Zombie.ZombieType;
 import se.mah.k3.pfi2.view.GameFrame;
+import se.mah.k3.pfi2.view.GamePanel;
 /** ALl info from http://plantsvszombies.wikia.com/wiki/Main_Page*/
 public class Controller {
 	private ArrayList<GameItem> gameItems;
@@ -44,9 +45,18 @@ public class Controller {
 	}
 
 	private void updateGameItems() {
+		//CLean out all items outside the area need tweeking with synchronized....
+//		for (int i = 0; i < gameItems.size(); i = i+1  ) {
+//			GameItem gameItem = gameItems.get(i);
+//			if (gameItem.getPositionX()<0 || gameItem.getPositionY()<0||
+//					gameItem.getPositionX()>gameFrame.getPanelWidth().getWidth()||
+//					gameItem.getPositionY()>gameFrame.getPanelWidth().getHeight()){
+//					gameItems.remove(i);
+//			}
+//		}
 		for (GameItem gameItem : gameItems) {
 			gameItem.doYourThing();
-			}
+		}
 	}
 
 	public void rePaint() {

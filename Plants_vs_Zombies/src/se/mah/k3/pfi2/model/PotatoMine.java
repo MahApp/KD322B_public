@@ -16,7 +16,7 @@ public class PotatoMine extends Plant {
 	}
 
 	@Override
-	public void act() {
+	public void doYourThing() {
 		setPositionX(getPositionX() + move);
 		setPositionY(getPositionY());
 		if(moving == true){
@@ -30,11 +30,6 @@ public class PotatoMine extends Plant {
 		} else if(super.getPositionX() <= 0){
 			moving = true;
 		}
-	}
-
-	@Override
-	public void doYourThing() {
-		// TODO Auto-generated method stub
 		
 	}
 

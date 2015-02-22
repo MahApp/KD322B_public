@@ -31,8 +31,4 @@ public abstract class Plant implements GameItem {
 	public void setPositionY(int positionY) {
 		this.positionY = positionY;
 	}
-
-
-	public abstract void act();
-
 }

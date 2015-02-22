@@ -1,6 +1,7 @@
 package se.mah.k3.pfi2.view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.TextArea;
 
@@ -26,6 +27,7 @@ import se.mah.k3.pfi2.control.Controller;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
@@ -153,5 +155,9 @@ public class GameFrame extends JFrame {
 	
 	public void repaint(){
 		gamepanel.render();
+	}
+	
+	public Dimension getPanelWidth(){
+		return gamepanel.getTheSizeOfThegameArea();
 	}
 }

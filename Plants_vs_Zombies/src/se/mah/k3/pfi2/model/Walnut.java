@@ -10,16 +10,9 @@ public class Walnut extends Plant {
 	}
 
 	@Override
-	public void act() {
+	public void doYourThing() {
 		setPositionX(getPositionX()+1);
 		this.setPositionY(getPositionY()+1);
-		
-	}
-
-	@Override
-	public void doYourThing() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

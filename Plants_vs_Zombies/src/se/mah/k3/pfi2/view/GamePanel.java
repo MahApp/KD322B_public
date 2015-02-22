@@ -1,6 +1,7 @@
 package se.mah.k3.pfi2.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 
@@ -38,7 +39,6 @@ public class GamePanel extends JPanel {
 		 //g.setColor(getBackground());
 		 g.drawImage(Toolkit.getDefaultToolkit().getImage(GamePanel.class.getResource("/se/mah/k3/pfi2/images/BackDay.jpg")), 10, 11, null);
          //g.fillRect(0, 0, getWidth(), getHeight());
-		
 		//This try catch is to prevent windowbuilder from crashing 
 	    try { 
 	    	g.setColor(Color.RED);
@@ -57,4 +57,9 @@ public class GamePanel extends JPanel {
 	public void render() {
 		this.repaint();
 	}
+	
+	public Dimension getTheSizeOfThegameArea(){
+		return getSize();
+	}
+	
 }

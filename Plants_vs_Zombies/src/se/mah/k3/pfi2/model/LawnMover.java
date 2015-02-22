@@ -34,14 +34,6 @@ public class LawnMover implements GameItem {
 
 
 
-	public void isItTimeToAct() {
-		positionX = positionX+1;
-		positionY = positionY+0;
-		
-	}
-
-
-
 	@Override
 	public void doYourThing() {
 		// TODO Auto-generated method stub

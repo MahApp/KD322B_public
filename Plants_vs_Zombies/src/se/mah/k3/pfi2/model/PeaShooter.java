@@ -35,12 +35,5 @@ public class PeaShooter extends Plant {
 		return image;
 	}
 
-
-
-	@Override
-	public void act() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }

@@ -18,25 +18,27 @@ public class SunFlower extends Plant {
 	private int posX;
 	private int posY;
 	private Controller controller;
-	
+	private long lastTime;
+	int ageInSeconds = 0;
 	public SunFlower(int positionXIn, int positionYIn) {
 		super(positionXIn, positionYIn);
 		posX = positionXIn;
 		posY = positionYIn;
 		image = Toolkit.getDefaultToolkit().getImage(SunFlower.class.getResource("/se/mah/k3/pfi2/images/Sunflower1.png")); //added our Sunflower image to the game. Anton
-	}
-
-	@Override
-	public void act() {
-					
+		lastTime = System.currentTimeMillis();
 	}
 
 	@Override
 	public void doYourThing() {
-		
+		//Measuring age
+		if (System.currentTimeMillis()-lastTime >= 1000){ //This is not exact since the Sunflower only is updated 40 times per sec...
+			ageInSeconds = ageInSeconds + 1;  
+			lastTime = System.currentTimeMillis();
+			System.out.println("Sunflower age: " + ageInSeconds);
+		}
 		sunTime ++;
-
-		System.out.println(sunTime);
+		
+		//System.out.println(sunTime);
 		if(sunTime==1000){
 			//controller.addSun(); //nullpointer! We don't understand why we can't do this.
 			//You don't have any reference to the controller you have only declared a variable named controller.
