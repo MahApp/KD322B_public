@@ -19,6 +19,7 @@ public class Zombie implements GameItem {
 	private ZombieType transform=null; 
 	private boolean dead;
 	private float wobble = (float) Math.random();
+	private int row;
 	public static int killed=0; 
 	public static int spawned=0; 
 	public static boolean gameoverFlag=false;
@@ -147,6 +148,13 @@ public class Zombie implements GameItem {
 	public void setPositionY(int _y) {
 
 		this.positionY=_y;
+	}
+	
+	public int getRow() {
+		return row;
+	}
+	public void setRow(int row) {
+		this.row = row;
 	}
 
 	/** dumping element when not used*/
