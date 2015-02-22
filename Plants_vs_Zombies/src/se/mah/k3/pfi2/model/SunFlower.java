@@ -38,7 +38,11 @@ public class SunFlower extends Plant {
 
 		System.out.println(sunTime);
 		if(sunTime==1000){
-			controller.addSun(); //nullpointer! We don't understand why we can't do this.
+			//controller.addSun(); //nullpointer! We don't understand why we can't do this.
+			//You don't have any reference to the controller you have only declared a variable named controller.
+			//If you create an new one we would have two controllers and that is not good.
+			//Instead create methods that measure the amount of sunlight the sunflower has collected.
+			//So the controller can see that and also decrease tha amount if you bye something.
 			//create sun here. 
 		}else{
 			
@@ -49,6 +53,7 @@ public class SunFlower extends Plant {
 	@Override
 	public Image getImage() {
 		return image; //Returns image. Anton
+		//Here you should return different images so the flower sways.
 		
 	}
 
