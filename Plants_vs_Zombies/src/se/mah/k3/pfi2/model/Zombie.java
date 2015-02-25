@@ -199,9 +199,25 @@ public class Zombie implements GameItem {
 			System.out.println("Game over , the zombie has reached the house!!");
 		}
 	}
+	private void ImageRotate() { // !!!! ändra här  !!!  för rotering
+		Image rotatedImage= this.image; // tilldelar samma image till rotatedImage
+		/* skriv er kod här för att ändra rotatdImage
+		 //först rekomenderas att göra om image till Graphic2d instans
+		
+		float grader=0; // i radianer
+		
+		//förslag på rotation:
+		AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
+		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+		
+		System.out.println(Math.sin(grader));
+		*/
+		this.image=  rotatedImage; // skriv över bilden med er roterade resultat image
+		
+	}
 	@Override
 	public Image getImage() {
-		
+		ImageRotate(); // rotera innan den visas
 		return this.image;
 	}
 
