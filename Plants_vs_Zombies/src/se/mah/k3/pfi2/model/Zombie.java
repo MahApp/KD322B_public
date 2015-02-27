@@ -228,7 +228,7 @@ public class Zombie implements GameItem {
 	}
 	@Override
 	public Image getImage() {
-		//ImageRotate(90, this); // rotera innan den visas, ImageObserver behöver definieras
+		ImageRotate(90, null); // rotera innan den visas
 		return this.image;
 	}
 
