@@ -1,9 +1,11 @@
 package se.mah.k3.pfi2.model;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -12,11 +14,13 @@ import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageOutputStream;
+import javax.swing.ImageIcon;
 
 import se.mah.k3.pfi2.control.GameItem;
+import se.mah.k3.pfi2.control.Controller;
 
 public class Zombie implements GameItem {
-	
+
 	Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/se/mah/k3/pfi2/images/zombie.png"));
 	Image cone = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/se/mah/k3/pfi2/images/cone1.png"));
 	private float positionX;
@@ -42,18 +46,17 @@ public class Zombie implements GameItem {
 	public static int killed=0; 
 	public static int spawned=0; 
 	public static boolean gameoverFlag;
-	
-	
+
 	public Zombie(int _positionX, int _positionY, ZombieType _type) {		
 		this.positionX = _positionX; // start posX
 		this.positionY = _positionY; // start PosY
 		spawned++;
 		if(_type== ZombieType.RANDOM){ 
-				ZombieType[] Z = ZombieType.values();
-				_type=Z[(int)(Math.random()*totalTypes)];
+			ZombieType[] Z = ZombieType.values();
+			_type=Z[(int)(Math.random()*totalTypes)];
 		}
 		this.type = _type;
-		
+
 		switch (_type) {
 		case NORMAL:
 			image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/se/mah/k3/pfi2/images/zombie.png"));
@@ -73,7 +76,7 @@ public class Zombie implements GameItem {
 			//combineImage();
 			break;
 		case CONEHEAD:
-			 image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/se/mah/k3/pfi2/images/zombie.png"));
+			image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/se/mah/k3/pfi2/images/zombie.png"));
 			this.health= (float) 28 ;
 			this.velocityX= (float)-0.3;
 			this.degrade= new ArrayList <Float>(Arrays.asList((float)7,(float)13,(float)19,(float)23));
@@ -83,7 +86,7 @@ public class Zombie implements GameItem {
 			transform=type.NORMAL; // transform into type after degradation
 			combineImage();
 			break;
-			
+
 		default:
 			this.health= (float) 9.25;
 			this.velocityX= (float)-0.3;
@@ -91,33 +94,33 @@ public class Zombie implements GameItem {
 			this.width=115;
 			this.height=185;
 			break;
-			}
-		
-		
-		
 		}
+
+
+
+	}
 	public void eat(){
 		// damage flowers
-		
-		
+
+
 	}
 	public void hit(float _damage){
 		if(!this.dead){
-		this.health-=_damage;
-		blink();
-		checkDeath();
-		checkDegradation();
+			this.health-=_damage;
+			blink();
+			checkDeath();
+			checkDegradation();
 		}
 	}
-	
-	
+
+
 	private void blink() {
 		// flashing graphics
-		
+
 	}
 	private void checkDegradation() {
 
-		
+
 	}
 	private void checkDeath() {
 		if(this.health<0){
@@ -128,7 +131,7 @@ public class Zombie implements GameItem {
 				e.printStackTrace();
 			}
 		}	
-		
+
 	}
 	public int getPositionX() {
 		return (int)positionX;
@@ -137,29 +140,29 @@ public class Zombie implements GameItem {
 	public int getPositionY() {
 		return (int)positionY;
 	}
-	
+
 	/**This makes the zoombie walk forward*/
 	public void walk(){
 		float w=(float)( 1*Math.sin(wobble)+1);
 		wobble+=0.03;
 		this.positionX+=w*velocityX;
-		
+
 		//HÄr kommer en switch på de olika ZombieTyperna
-//		switch (type) {
-//		case NORMAL:
-//			this.positionX+=velocityX;
-//			break;
-//		case FLAG:
-//			this.positionX+=velocityX;
-//			break;
-//		case CONEHEAD:
-//			this.positionX+=velocityX;
-//			break;
-//		default:
-//			break;
-//		}	
+		//		switch (type) {
+		//		case NORMAL:
+		//			this.positionX+=velocityX;
+		//			break;
+		//		case FLAG:
+		//			this.positionX+=velocityX;
+		//			break;
+		//		case CONEHEAD:
+		//			this.positionX+=velocityX;
+		//			break;
+		//		default:
+		//			break;
+		//		}	
 	}
-	
+
 	public void combineImage(){
 		// load source images
 		Image overlay=cone;
@@ -173,7 +176,7 @@ public class Zombie implements GameItem {
 			Graphics g = combined.getGraphics();
 			g.drawImage(image, 0, 40, null);
 			g.drawImage(overlay, 0, 0, null);
-			
+
 
 			//ByteArrayOutputStream os = new ByteArrayOutputStream();
 			ImageIO.write(combined,"png", os); 
@@ -184,7 +187,7 @@ public class Zombie implements GameItem {
 			e.printStackTrace();
 		}
 
-		
+
 	}
 
 	@Override
@@ -199,9 +202,33 @@ public class Zombie implements GameItem {
 			System.out.println("Game over , the zombie has reached the house!!");
 		}
 	}
+	private void ImageRotate(double degrees, ImageObserver o) { // !!!! ändra här  !!!  för rotering
+		Image rotatedImage= this.image; 
+		
+		ImageIcon zombieIcon = new ImageIcon(this.image);
+		BufferedImage rotatedZombie = new BufferedImage(zombieIcon.getIconWidth(), zombieIcon.getIconHeight(), BufferedImage.TYPE_INT_ARGB); 
+		Graphics2D g2 = (Graphics2D)rotatedZombie.getGraphics();
+		g2.rotate(Math.toRadians(90), zombieIcon.getIconHeight() / 2, zombieIcon.getIconWidth());
+		g2.drawImage(this.image, 0, 0, o);
+		
+		// tilldelar samma image till rotatedImage
+		/* skriv er kod här för att ändra rotatdImage
+		 //först rekomenderas att göra om image till Graphic2d instans
+
+		float grader=0; // i radianer
+
+		//förslag på rotation:
+		AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
+		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+
+		System.out.println(Math.sin(grader));
+		 */
+		this.image=  rotatedImage; // skriv över bilden med er roterade resultat image
+
+	}
 	@Override
 	public Image getImage() {
-		
+		ImageRotate(90, null); // rotera innan den visas
 		return this.image;
 	}
 
@@ -244,11 +271,11 @@ public class Zombie implements GameItem {
 	public boolean isOnSquare(int _square[]) {
 		return onSquare[_square[0]][_square[1]];
 	}
-	
+
 	public int [] getSquare() {
-			return square;
+		return square;
 	}
-	
+
 	public void setToSquare(int _row, int _column){
 		square[0]=_row;
 		square[1]=_column;
@@ -266,6 +293,6 @@ public class Zombie implements GameItem {
 	/** dumping element when not used*/
 	protected void finalize() throws Throwable{
 		killed++;
-	 System.out.println("zombie is removed from memory");
+		System.out.println("zombie is removed from memory");
 	}
 }
