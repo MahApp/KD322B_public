@@ -1,13 +1,16 @@
 package se.mah.k3.pfi2.model;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +25,7 @@ import se.mah.k3.pfi2.control.Controller;
 public class Zombie implements GameItem {
 
 	Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/se/mah/k3/pfi2/images/zombie.png"));
+	public Image finalImage;
 	Image cone = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/se/mah/k3/pfi2/images/cone1.png"));
 	private float positionX;
 	private float positionY;
@@ -46,6 +50,7 @@ public class Zombie implements GameItem {
 	public static int killed=0; 
 	public static int spawned=0; 
 	public static boolean gameoverFlag;
+	 private float degree=0;
 
 	public Zombie(int _positionX, int _positionY, ZombieType _type) {		
 		this.positionX = _positionX; // start posX
@@ -72,7 +77,7 @@ public class Zombie implements GameItem {
 			this.velocityX= (float)-0.4;
 			this.degrade= new ArrayList <Float>(Arrays.asList((float)4.75));
 			this.width=135;
-			this.height=235;
+			this.height=225;
 			//combineImage();
 			break;
 		case CONEHEAD:
@@ -95,8 +100,7 @@ public class Zombie implements GameItem {
 			this.height=185;
 			break;
 		}
-
-
+		//ImageRotate(); // rotera innan den visas
 
 	}
 	public void eat(){
@@ -202,15 +206,29 @@ public class Zombie implements GameItem {
 			System.out.println("Game over , the zombie has reached the house!!");
 		}
 	}
-	private void ImageRotate(double degrees, ImageObserver o) { // !!!! ändra här  !!!  för rotering
-		Image rotatedImage= this.image; 
+	private void ImageRotate() { // !!!! ändra här  !!!  för rotering
+		//Image rotatedImage= this.image; 
+		InputStream fis ;
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		degree+=0.1;
 		
-		ImageIcon zombieIcon = new ImageIcon(this.image);
-		BufferedImage rotatedZombie = new BufferedImage(zombieIcon.getIconWidth(), zombieIcon.getIconHeight(), BufferedImage.TYPE_INT_ARGB); 
+	//	ImageIcon zombieIcon = new ImageIcon(this.image);
+	//	BufferedImage rotatedZombie = new BufferedImage(zombieIcon.getIconWidth(), zombieIcon.getIconHeight(), BufferedImage.TYPE_INT_ARGB); 
+		BufferedImage rotatedZombie = new BufferedImage(this.width*1, this.height*1, BufferedImage.TYPE_INT_ARGB);
+	//	Graphics g = rotatedZombie.getGraphics();
 		Graphics2D g2 = (Graphics2D)rotatedZombie.getGraphics();
-		g2.rotate(Math.toRadians(90), zombieIcon.getIconHeight() / 2, zombieIcon.getIconWidth());
-		g2.drawImage(this.image, 0, 0, o);
 		
+		
+		
+		AffineTransform old = g2.getTransform();
+	//	g2.setColor(new Color(255,255,255,50));
+	//	g2.fillRect(0, 0, rotatedZombie.getWidth(), rotatedZombie.getHeight());
+		g2.translate(rotatedZombie.getWidth()/2,rotatedZombie.getHeight()/2);
+		g2.rotate(Math.toRadians(2.5*Math.sin(degree)));
+		g2.drawImage(this.image,-this.image.getWidth(null)/2,-this.image.getHeight(null)/2, null);
+		g2.setTransform(old);
+	//	g2.rotate(Math.toRadians(90), zombieIcon.getIconHeight() / 2, zombieIcon.getIconWidth());
+	
 		// tilldelar samma image till rotatedImage
 		/* skriv er kod här för att ändra rotatdImage
 		 //först rekomenderas att göra om image till Graphic2d instans
@@ -223,13 +241,23 @@ public class Zombie implements GameItem {
 
 		System.out.println(Math.sin(grader));
 		 */
-		this.image=  rotatedImage; // skriv över bilden med er roterade resultat image
+		
+		try {
+		ImageIO.write(rotatedZombie,"png", os);
+		fis = new ByteArrayInputStream(os.toByteArray());
+		this.finalImage=ImageIO.read(fis);  
+		//this.image= rotatedImage; // skriv över bilden med er roterade resultat image
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	
 
 	}
 	@Override
 	public Image getImage() {
-		ImageRotate(90, null); // rotera innan den visas
-		return this.image;
+		 ImageRotate();
+		return this.finalImage;
 	}
 
 	@Override
