@@ -2,38 +2,39 @@ package se.mah.k3.pfi2.model;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-
-import se.mah.k3.pfi2.view.GameFrame;
+import java.util.Random;
 
 public class PeaShooter extends Plant {
-	
-	public static int lastYPos = 0;
+
 	private Image image;
 
-	
-	
+
 	public PeaShooter(int positionXIn, int positionYIn) {
 		super(positionXIn, positionYIn);
-		image = Toolkit.getDefaultToolkit().getImage(PeaShooter.class.getResource("/se/mah/k3/pfi2/images/Peashooter1.png"));
-
 		
+		//Generate random number dictating which row to put the Pea Shooter
+		Random random = new Random();
+		int low = 1;
+		int high = 6;
+		int row = random.nextInt(high-low) + low;
+		
+		this.setPositionX(270);
+		this.setPositionY(row*100-10); //row * 100px - 10px
+
+		//Load animated image
+		this.image = Toolkit.getDefaultToolkit().getImage(Walnut.class.getResource("/se/mah/k3/pfi2/images/Peashooter.gif"));
+
 	}
 
 
 
 	@Override
 	public void doYourThing() {
-//		setPositionX(x);
-//		setPositionY(y);
-		
 	}
-
-
 
 	@Override
 	public Image getImage() {
 		return image;
 	}
 
-	
 }
