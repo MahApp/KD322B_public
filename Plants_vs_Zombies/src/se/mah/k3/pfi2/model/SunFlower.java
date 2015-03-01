@@ -19,12 +19,16 @@ public class SunFlower extends Plant {
 	private int posY;
 	private Controller controller;
 	private long lastTime;
-	int ageInSeconds = 0;
+
+	private int ageInSeconds = 0;
+	public int sunlight = 0;
 	public SunFlower(int positionXIn, int positionYIn) {
 		super(positionXIn, positionYIn);
 		posX = positionXIn;
 		posY = positionYIn;
-		image = Toolkit.getDefaultToolkit().getImage(SunFlower.class.getResource("/se/mah/k3/pfi2/images/Sunflower1.png")); //added our Sunflower image to the game. Anton
+		//updated the sunflower image to a gif with a transparent background
+		image = Toolkit.getDefaultToolkit().getImage(SunFlower.class.getResource("/se/mah/k3/pfi2/images/sunflower_transparent.gif")); 
+
 		lastTime = System.currentTimeMillis();
 	}
 
@@ -36,20 +40,31 @@ public class SunFlower extends Plant {
 			lastTime = System.currentTimeMillis();
 			System.out.println("Sunflower age: " + ageInSeconds);
 		}
-		sunTime ++;
+		
+		
+		//increases the amount of sunlight by 25 every ten seconds (according to ageInSeconds)
+		//but it iterates too many times so it makes too much sunlight... how to fix this?
+		if(ageInSeconds % 10 == 0){
+			sunlight += 25;
+			ageInSeconds += 1; //quick fix...
+			System.out.println("Amount of sunlight: " + sunlight);
+		}
+		
 		
 		//System.out.println(sunTime);
-		if(sunTime==1000){
+		//if(sunTime==1000){
 			//controller.addSun(); //nullpointer! We don't understand why we can't do this.
 			//You don't have any reference to the controller you have only declared a variable named controller.
 			//If you create an new one we would have two controllers and that is not good.
 			//Instead create methods that measure the amount of sunlight the sunflower has collected.
 			//So the controller can see that and also decrease tha amount if you bye something.
 			//create sun here. 
-		}else{
-			
-		}
 		
+	}
+	
+	//a getter method so the controller can see the amount of sunlight the sunflower has created
+	public int getAmountOfSunlight(){
+		return sunlight;
 	}
 
 	@Override
