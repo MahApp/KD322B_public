@@ -66,7 +66,8 @@ public class Controller {
 
 	//Since we want to add all instances as their runtime classes this still has to be individual methods.
 	public void addZombie() {
-		gameItems.add(new Zombie(1350,(int)(Math.random()*400+20),ZombieType.CONEHEAD));
+		//gameItems.add(new Zombie(1350,(int)(Math.random()*400+20),ZombieType.CONEHEAD));
+		gameItems.add(new Zombie(1350,(int)(Math.random()*400+20),ZombieType.RANDOM));
 	}
 
 	public void addSun() {
