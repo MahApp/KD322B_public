@@ -7,15 +7,17 @@ import java.io.IOException;
 
 public class Exeptions {
 
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
 		//Not enforced
+
+		
 		try
 		{
 		    Integer.parseInt("one");      // Statement that can cause an exception.
 		}
 		catch (NumberFormatException e)   // Specify which exception to catch.
 		{
-		   e.printStackTrace();
+		  
 		}
 		//enforced
 		try {

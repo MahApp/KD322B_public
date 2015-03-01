@@ -1,0 +1,6 @@
+Nedan finns en JSON fil som anger vädret i Malmö, parsa informationen och presentera den.
+planera arbetet genom att skriva en backlog tänk på vad som kan göras samtidigt.
+Gör en egen branch med unikt namn.
+JSON: http://api.openweathermap.org/data/2.5/weather?q=Malmo,se
+Gör en pull request när ni är klara.
+OM ni hinner gör så att man kan välja på ett antal städer i en dropdownlista.

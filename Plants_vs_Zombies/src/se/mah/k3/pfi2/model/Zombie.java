@@ -103,7 +103,7 @@ public class Zombie implements GameItem {
 	public void walk(){
 		float w=(float)( 1*Math.sin(wobble)+1);
 		wobble+=0.03;
-		this.positionX+=w*velocityX;
+		this.positionX=this.positionX+w*velocityX;
 		
 		//HÄr kommer en switch på de olika ZombieTyperna
 //		switch (type) {

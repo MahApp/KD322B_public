@@ -23,6 +23,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.border.LineBorder;
 
 import java.awt.Color;
+import java.awt.event.MouseMotionAdapter;
 
 public class JPanelExample extends JFrame {
 
@@ -34,6 +35,7 @@ public class JPanelExample extends JFrame {
 	private JButton btnNewButton_3;
 	private JTextField txtAText;
 	private JPanel dragDropPanel;
+	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -55,6 +57,7 @@ public class JPanelExample extends JFrame {
 	 * Create the frame.
 	 */
 	public JPanelExample() {
+		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 530, 300);
 		contentPane = new JPanel();
@@ -131,11 +134,21 @@ public class JPanelExample extends JFrame {
 		outerInner.add(btnHideThis);
 		
 		dragDropPanel = new JPanel();
+		dragDropPanel.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				textField_2.setText("Mousepos :"+ e.getX()+":" +e.getY());
+			}
+		});
 		dragDropPanel.setVisible(false);
 		dragDropPanel.setBorder(new TitledBorder(null, "MouseListener", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		dragDropPanel.setBackground(SystemColor.inactiveCaptionBorder);
-		dragDropPanel.setBounds(10, 11, 494, 250);
+		dragDropPanel.setBounds(10, 71, 494, 179);
 		contentPane.add(dragDropPanel);
+		
+		textField_2 = new JTextField();
+		dragDropPanel.add(textField_2);
+		textField_2.setColumns(10);
 	}
 	
 	//Inner class thread
