@@ -23,8 +23,7 @@ public class Weather {
 	}
 
 	public float getTemp() {
-		float kelvin = 273.15;
-		return temp + kelvin;
+		return temp + (float) 273.15;
 	}
 
 	public String getMain() {
