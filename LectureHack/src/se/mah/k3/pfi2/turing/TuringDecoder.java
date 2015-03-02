@@ -42,7 +42,8 @@ public class TuringDecoder extends JFrame {
 	 * Create the frame.
 	 */
 	public TuringDecoder() {
-		
+		String alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String wholeCoded="";
 		String adress ="https://gist.githubusercontent.com/k3larra/a0d5e6ff7622f5a78872/raw/7958992cebf92e76b07f8adac820107894447b6f/Turing";
 		//String adress = "https://gist.github.com/k3larra/a0d5e6ff7622f5a78872";
 		
@@ -51,55 +52,55 @@ public class TuringDecoder extends JFrame {
 			URL gist = new URL(adress);
 			Scanner s = new Scanner(gist.openStream());
 			while (s.hasNext()){
-				String coded = s.nextLine();
-				System.out.println(coded);
+				String coded = s.nextLine().toUpperCase();
+				//System.out.println(coded);
+				wholeCoded=wholeCoded+coded;
 			}
 			s.close();
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
 			
-			
+		System.out.println("");
 		
+		System.out.println(wholeCoded);
 		
-		
-		
-		
-		
-		
-		/*
-		
-
-	    try {
-	 
-		String url = adress;
-		//Prepare
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-		//Read and parse the file and place the result in doc
-		Document doc = dBuilder.parse(url);
-		doc.getDocumentElement().normalize(); //Fixa till lite med xml.....
-		System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-		NodeList nList = doc.getElementsByTagName("staff");
-		System.out.println("----------------------------");
-		for (int temp = 0; temp < nList.getLength(); temp++) {  //Iterate throuh all nodes
-			Node nNode = nList.item(temp);
-			System.out.println("\nCurrent Element :" + nNode.getNodeName());
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
-				System.out.println("Staff id : " + eElement.getAttribute("id")); //This is the name in the nodes...
-				System.out.println("First Name : " + eElement.getElementsByTagName("firstname").item(0).getTextContent());
-				System.out.println("Last Name : " + eElement.getElementsByTagName("lastname").item(0).getTextContent());
-				System.out.println("Nick Name : " + eElement.getElementsByTagName("nickname").item(0).getTextContent());
-				System.out.println("Salary : " + eElement.getElementsByTagName("salary").item(0).getTextContent());
-			}
-		}
-	    } catch (Exception e) {
-	    	e.printStackTrace();
-	    }
-	  
-
-		*/
+//	//!!!	stolen code !!!
+//		   String msg = "";
+//		           String[] msgCheck = new String[3];
+//		   	        //String encMsg = encryptMsg_txt.getText().toUpperCase();
+//		   	        int diff[] = new int[3];
+//		   	        int[] alphaIndex = new int[3];
+//		  	         
+//		 	        for (int i = 0; i < 3; i++)
+//		   	            diff[i] = char_txt[i].getText().toUpperCase().charAt(0) - 'A';
+//		            
+//		         for (int index = 0; index < wholeCoded.length(); index++)
+//		        {
+//		            if (isAlpha(wholeCoded.charAt(index) ) )
+//			            {
+//		                alphaIndex[index % 3] = (wholeCoded.charAt(index) + diff[index % 3]++ - 'A') % 26;
+//		                 msgCheck[index % 3] += new String(alphabet, alphaIndex[index % 3], 1);
+//		                if (diff[index % 3] > 'Z' - 'A')
+//		                    diff[index % 3] -= 'Z' - 'A';
+//		  	            }
+//		  	            else
+//		  	            {
+//		                for (int i = 0; i < 3; i++)
+//		   	                {
+//		  	                    msgCheck[i] += wholeCoded.substring(index, 1);
+//		                  }
+//		              }
+//		  	        }
+//		  	         
+//		  	        if (msgCheck[0].equals(msgCheck[1]) && msgCheck[1].equals(msgCheck[2]) ) {
+//		            msg = msgCheck[0];
+//					}else{
+//		 	            msg = "COULD NOT DECRYPT PROPERLY";
+//		  	        }
+//		
+//			    	System.out.println(msg);
+//	
 		
 			
 			
