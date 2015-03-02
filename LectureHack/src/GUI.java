@@ -78,5 +78,10 @@ public class GUI extends JFrame {
 		lblMolnImage.setIcon(new ImageIcon(GUI.class.getResource("/images/moln.png")));
 		lblMolnImage.setBounds(-54, 50, 331, 266);
 		panel.add(lblMolnImage);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(GUI.class.getResource("/images/snowflake.png")));
+		label.setBounds(-61, 0, 428, 386);
+		panel.add(label);
 	}
 }
