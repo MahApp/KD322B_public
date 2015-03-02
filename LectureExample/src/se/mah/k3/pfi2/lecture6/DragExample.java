@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
-import com.sun.corba.se.impl.orbutil.RepIdDelegator_1_3_1;
+//import com.sun.corba.se.impl.orbutil.RepIdDelegator_1_3_1;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
