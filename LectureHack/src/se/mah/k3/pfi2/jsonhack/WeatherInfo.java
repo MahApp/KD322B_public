@@ -24,6 +24,15 @@ public class WeatherInfo {
 		try {
 			JsonFactory jF = new JsonFactory();
 			URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q=Malmo,se");
+			JsonParser jP = jF.createParser(url);
+			while (jP.nextToken() != JsonToken.END_OBJECT) {
+				String fieldname = jP.getCurrentName();
+				if("coord".equals(fieldname)){
+					jP.nextToken();
+					System.out.println(jP.getText());
+				}
+			}
+			jP.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
