@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -16,21 +16,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageOutputStream;
-import javax.swing.ImageIcon;
 
 import se.mah.k3.pfi2.control.GameItem;
-import se.mah.k3.pfi2.control.Controller;
 
 public class Zombie implements GameItem {
 
-	Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/se/mah/k3/pfi2/images/zombie.png"));
-	public Image finalImage;
-	Image cone = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/se/mah/k3/pfi2/images/cone1.png"));
-	private float positionX;
-	private float positionY;
-	private int width;
-	private int height;
+	private Image image; // tempImage
+	public Image finalImage; // outputImage
+	private Image cone = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/se/mah/k3/pfi2/images/cone1.png")); // tempImage
+	private BufferedImage rotatedZombie; // tempImage
+	private ByteArrayOutputStream rotateOs;
+	private int positionX,positionY;
+	private int width,height;
 	private float health; //zombies hitpoints
 	private ArrayList <Float> degrade; // when health reach certain threshold , zombies appearance change
 	private float velocityX,velocityY;
@@ -39,20 +36,21 @@ public class Zombie implements GameItem {
 	private static final int totalTypes = ZombieType.values().length;
 	private ZombieType transform=null; 
 	private ArrayList <ZombiePart> parts= new ArrayList <ZombiePart>();
-	private boolean dead;
-	private boolean eating;
+	private boolean dead,eating;
 	private float wobble = (float) Math.random();
 	public static final int MAX_ROWS=10,MAX_COLUMNS=5; 
-	private int row;
-	private int column;
+	private int row,column;
 	private boolean [][]onSquare =new boolean [MAX_ROWS][MAX_COLUMNS]; 
 	private int[] square=new int[2];
-	public static int killed=0; 
-	public static int spawned=0; 
+	public static int killed=0,spawned=0; 
 	public static boolean gameoverFlag;
-	 private float degree=0;
-
-	public Zombie(int _positionX, int _positionY, ZombieType _type) {		
+	 private int degree=0;
+	 private long graphicTime,updateTime;
+	 public final int drawInterval=350,updateInterval=40;
+	 
+	public Zombie(int _positionX, int _positionY, ZombieType _type) {	
+		this.graphicTime= System.currentTimeMillis();
+		this.updateTime=System.currentTimeMillis();
 		this.positionX = _positionX; // start posX
 		this.positionY = _positionY; // start PosY
 		spawned++;
@@ -64,9 +62,10 @@ public class Zombie implements GameItem {
 
 		switch (_type) {
 		case NORMAL:
-			image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/se/mah/k3/pfi2/images/zombie.png"));
+			image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/se/mah/k3/pfi2/images/zombie.png")); 
+			finalImage=image;
 			this.health= (float) 9.25;
-			this.velocityX= (float)-0.3;
+			this.velocityX= (float)-0.6;
 			this.degrade= new ArrayList <Float>(Arrays.asList((float)5));
 			this.width=115;
 			this.height=185;
@@ -74,16 +73,16 @@ public class Zombie implements GameItem {
 		case FLAG:
 			image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/se/mah/k3/pfi2/images/flag.png"));
 			this.health= (float) 9.5;
-			this.velocityX= (float)-0.4;
+			this.velocityX= (float)-0.8;
 			this.degrade= new ArrayList <Float>(Arrays.asList((float)4.75));
-			this.width=135;
-			this.height=225;
+			this.width=165;
+			this.height=255;
 			//combineImage();
 			break;
 		case CONEHEAD:
 			image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/se/mah/k3/pfi2/images/zombie.png"));
 			this.health= (float) 28 ;
-			this.velocityX= (float)-0.3;
+			this.velocityX= (float)-0.6;
 			this.degrade= new ArrayList <Float>(Arrays.asList((float)7,(float)13,(float)19,(float)23));
 			//this.parts.add();
 			this.width=115;
@@ -100,7 +99,8 @@ public class Zombie implements GameItem {
 			this.height=185;
 			break;
 		}
-		//ImageRotate(); // rotera innan den visas
+		
+		imageRotate(); // rotera innan den visas
 
 	}
 	public void eat(){
@@ -116,8 +116,18 @@ public class Zombie implements GameItem {
 			checkDegradation();
 		}
 	}
+	private void damageTint() {
+	//	public BufferedImage colorImage(BufferedImage loadImg, int red, int green, int blue) {
+		    BufferedImage tempImg = new BufferedImage(finalImage.getWidth(null), finalImage.getHeight(null),BufferedImage.TYPE_INT_ARGB);
+		    Graphics2D graphics = tempImg.createGraphics(); 
+		    Color newColor = new Color(255, 255, 255);
+		   // graphics.setXORMode(newColor);
+		    graphics.drawImage(tempImg, null, 0, 0);
+		   // graphics.dispose();
+		    finalImage=tempImg;
+	}
 
-
+	
 	private void blink() {
 		// flashing graphics
 
@@ -145,11 +155,11 @@ public class Zombie implements GameItem {
 		return (int)positionY;
 	}
 
-	/**This makes the zoombie walk forward*/
+	/**This makes the zombie walk forward*/
 	public void walk(){
 		float w=(float)( 1*Math.sin(wobble)+1);
-		wobble+=0.03;
-		this.positionX+=w*velocityX;
+		wobble+=0.1;
+		this.positionX+=Math.round(w*velocityX);
 		//HÄr kommer en switch på de olika ZombieTyperna
 		//		switch (type) {
 		//		case NORMAL:
@@ -179,8 +189,7 @@ public class Zombie implements GameItem {
 			Graphics g = combined.getGraphics();
 			g.drawImage(image, 0, 40, null);
 			g.drawImage(overlay, 0, 0, null);
-
-
+			g.dispose();
 			//ByteArrayOutputStream os = new ByteArrayOutputStream();
 			ImageIO.write(combined,"png", os); 
 			fis = new ByteArrayInputStream(os.toByteArray());
@@ -190,13 +199,19 @@ public class Zombie implements GameItem {
 			e.printStackTrace();
 		}
 
+	}
 
+	public void update(){
+		if(updateTime+updateInterval<System.currentTimeMillis()){
+		this.walk();
+		this.checkIfReachGoal();
+		updateTime=System.currentTimeMillis();
+		}
 	}
 
 	@Override
 	public void doYourThing() {
-		this.walk();
-		this.checkIfReachGoal();
+		update();
 	}
 
 	private void checkIfReachGoal() {
@@ -205,27 +220,30 @@ public class Zombie implements GameItem {
 			System.out.println("Game over , the zombie has reached the house!!");
 		}
 	}
-	private void ImageRotate() { // !!!! ändra här  !!!  för rotering
+	private void imageRotate() { // !!!! ändra här  !!!  för rotering
 		//Image rotatedImage= this.image; 
 		InputStream fis ;
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		degree+=0.1;
-		
+		rotateOs = new ByteArrayOutputStream();
+		degree+=1;
+		rotatedZombie = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB); // tempImage
 	//	ImageIcon zombieIcon = new ImageIcon(this.image);
 	//	BufferedImage rotatedZombie = new BufferedImage(zombieIcon.getIconWidth(), zombieIcon.getIconHeight(), BufferedImage.TYPE_INT_ARGB); 
-		BufferedImage rotatedZombie = new BufferedImage(this.width*1, this.height*1, BufferedImage.TYPE_INT_ARGB);
+	//	BufferedImage rotatedZombie = new BufferedImage(this.width*1, this.height*1, BufferedImage.TYPE_INT_ARGB);
 	//	Graphics g = rotatedZombie.getGraphics();
+
 		Graphics2D g2 = (Graphics2D)rotatedZombie.getGraphics();
-		
-		
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_OFF);
+		//g2.clearRect(0, 0, this.width, this.height);
+	  
 		
 		AffineTransform old = g2.getTransform();
-	//	g2.setColor(new Color(255,255,255,50));
-	//	g2.fillRect(0, 0, rotatedZombie.getWidth(), rotatedZombie.getHeight());
+		//g2.setColor(new Color(255,255,255,50));
+		//g2.fillRect(0, 0, rotatedZombie.getWidth(), rotatedZombie.getHeight());
 		g2.translate(rotatedZombie.getWidth()/2,rotatedZombie.getHeight()/2);
-		g2.rotate(Math.toRadians(2.5*Math.sin(degree)));
+		g2.rotate(Math.toRadians(3*Math.sin(degree)));
 		g2.drawImage(this.image,-this.image.getWidth(null)/2,-this.image.getHeight(null)/2, null);
-		g2.setTransform(old);
+		//g2.setTransform(old);
+		g2.dispose(); // release resource
 	//	g2.rotate(Math.toRadians(90), zombieIcon.getIconHeight() / 2, zombieIcon.getIconWidth());
 	
 		// tilldelar samma image till rotatedImage
@@ -242,8 +260,8 @@ public class Zombie implements GameItem {
 		 */
 		
 		try {
-		ImageIO.write(rotatedZombie,"png", os);
-		fis = new ByteArrayInputStream(os.toByteArray());
+		ImageIO.write(rotatedZombie,"png", rotateOs);
+		fis = new ByteArrayInputStream(rotateOs.toByteArray());
 		this.finalImage=ImageIO.read(fis);  
 		//this.image= rotatedImage; // skriv över bilden med er roterade resultat image
 		} catch (IOException e) {
@@ -253,21 +271,28 @@ public class Zombie implements GameItem {
 	
 
 	}
+	private void updateGraphics(){
+		if(graphicTime+drawInterval<System.currentTimeMillis()){
+			imageRotate();
+			//damageTint();
+			graphicTime=+System.currentTimeMillis();
+		}
+	}
+	
+
 	@Override
 	public Image getImage() {
-		 ImageRotate();
+		updateGraphics();
 		return this.finalImage;
 	}
 
 	@Override
 	public void setPositionX(int _x) {
-
 		this.positionX=_x;
 	}
 
 	@Override
 	public void setPositionY(int _y) {
-
 		this.positionY=_y;
 	}
 	public int getWidth() {
