@@ -45,7 +45,7 @@ public class TuringDecoder extends JFrame {
 		String alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		String wholeCoded="";
 		String adress ="https://gist.githubusercontent.com/k3larra/a0d5e6ff7622f5a78872/raw/7958992cebf92e76b07f8adac820107894447b6f/Turing";
-		//String adress = "https://gist.github.com/k3larra/a0d5e6ff7622f5a78872";
+		//String extra adress = "https://gist.github.com/k3larra/a0d5e6ff7622f5a78872";
 		
 		
 		try {
