@@ -7,13 +7,13 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 
 public class WeatherInfo {
-	//Detta √§r en class som l√§ser JSON-filen
+	//Detta ‰ en class som l‰ser JSON-filen
 	//test
 	
-	//l√§s json-filen
+	//ls json-filen
 	//presentera den genom consol prints
-	//g√∂r variable String som skapar URL
-	//g√∂r gui med v√§ljbar lista
+	//gˆr variable String som skapar URL
+	//gˆr gui med valbar lista
 	
 	public static void main (String[] args){
 		WeatherInfo wI = new WeatherInfo();
